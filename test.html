@@ -1,0 +1,50 @@
+<html>
+<head>
+  <title>tap component</title>
+  <style>
+    .box {
+      width: 400px;
+      height: 400px;
+      border: 1px solid #222;
+      color: #222;
+      text-align: center;
+      padding: 20px;
+      margin: 20px;
+      font-size: 44px;
+    }
+  </style>
+</head>
+<body>
+  <h1>tap component</h1>
+  <div class="tap box">tap to change color</div>
+  <div class="click box">
+    click to change color
+    <small>(notice it's much slower)</small>
+  </div>
+
+  <script src="../build/build.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    var Tap = require('tap'),
+        tapbox = document.querySelector('.tap.box');
+        clickbox = document.querySelector('.click.box');
+
+    var tap = Tap(tapbox, function() {
+      tapbox.style.backgroundColor = randomColor();
+    });
+
+    clickbox.onclick = function() {
+      clickbox.style.backgroundColor = randomColor();
+    }
+
+    setTimeout(function() {
+      tapbox.innerHTML = 'no longer tappable!';
+      tap.unbind();
+    }, 5000);
+
+    function randomColor() {
+      return '#'+Math.floor(Math.random()*16777215).toString(16);
+    }
+
+  </script>
+</body>
+</html>
