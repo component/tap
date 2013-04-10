@@ -1,7 +1,7 @@
 
 # tap
 
-  tap on things
+  tap on elements. bypasses the click delay on mobile.
 
 ## Installation
 
@@ -9,9 +9,13 @@
 
 ## API
 
-### tap(el, fn)
+### Tap(el, fn)
 
 Initialize a new tap event on `el` that triggers `fn`.
+
+```js
+tap(el, fn);
+```
 
 ### .unbind()
 
