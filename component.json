@@ -2,11 +2,11 @@
   "name": "tap",
   "repo": "component/tap",
   "description": "tap on things",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "keywords": [],
   "dependencies": {
-    "component/event" : "*",
-    "component/bind" : "*"
+    "component/event": "*",
+    "component/bind": "*"
   },
   "development": {},
   "license": "MIT",
