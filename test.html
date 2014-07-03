@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>tap component</title>
+  <meta name="viewport" content="initial-scale=0.5; maximum-scale=0.5; user-scalable=0">
   <style>
     .box {
       width: 400px;
@@ -11,6 +12,11 @@
       padding: 20px;
       margin: 20px;
       font-size: 44px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -o-user-select: none;
+      user-select: none;
     }
   </style>
 </head>
@@ -39,6 +45,12 @@
     setTimeout(function() {
       tapbox.innerHTML = 'no longer tappable!';
       tap.unbind();
+      setTimeout(function() {
+        tapbox.innerHTML = 'tap to change color';
+        Tap(tapbox, function() {
+          tapbox.style.backgroundColor = randomColor();
+        });
+      }, 5000);
     }, 5000);
 
     function randomColor() {
