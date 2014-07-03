@@ -12,6 +12,12 @@ var event = require('event'),
 module.exports = Tap;
 
 /**
+ * Touch support
+ */
+
+var support = 'ontouchstart' in window;
+
+/**
  * Tap on `el` to trigger a `fn`
  *
  * Tap will not fire if you move your finger
@@ -27,11 +33,14 @@ function Tap(el, fn) {
   this.fn = fn || function() {};
   this.tap = true;
 
-  this.ontouchmove = bind(this, this.touchmove);
-  this.ontouchend = bind(this, this.touchend);
-
-  event.bind(el, 'touchmove', this.ontouchmove);
-  event.bind(el, 'touchend', this.ontouchend);
+  if (support) {
+    this.ontouchmove = bind(this, this.touchmove);
+    this.ontouchend = bind(this, this.touchend);
+    event.bind(el, 'touchmove', this.ontouchmove);
+    event.bind(el, 'touchend', this.ontouchend);
+  } else {
+    event.bind(el, 'click', this.fn);
+  }
 }
 
 /**
@@ -43,7 +52,7 @@ function Tap(el, fn) {
  */
 
 Tap.prototype.touchend = function(e) {
-  if(this.tap) this.fn(e);
+  if (this.tap) this.fn(e);
   this.tap = true;
   event.bind(this.el, 'touchmove', this.ontouchmove);
   return this;
@@ -71,5 +80,6 @@ Tap.prototype.touchmove = function() {
 
 Tap.prototype.unbind = function() {
   event.unbind(this.el, 'touchend', this.ontouchend);
+  event.unbind(this.el, 'click', this.fn);
   return this;
-}
+};
