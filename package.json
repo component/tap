@@ -5,8 +5,12 @@
   "version": "1.0.0",
   "keywords": [],
   "dependencies": {
-    "event-component": "*",
-    "bind-component": "*"
+    "component-event": "*",
+    "component-bind": "*"
+  },
+  "browser": {
+    "event": "component-event",
+    "bind": "component-bind"
   },
   "development": {},
   "license": "MIT",
